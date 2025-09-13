@@ -21,7 +21,7 @@ public class Template_SingletonClass {
         return single_instance;
     }
 
-    /** Class Member Functions x**/
+    /** Class Member Functions **/
 
 
 }
