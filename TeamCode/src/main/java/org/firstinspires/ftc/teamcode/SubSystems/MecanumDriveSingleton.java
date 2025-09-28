@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode.SubSystems;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
+
 public class MecanumDriveSingleton {
 
     private final DcMotorEx front_left_Drive, back_left_drive, front_right_drive, back_right_drive;
@@ -62,6 +65,39 @@ public class MecanumDriveSingleton {
         double backRightPower  = (drive + strafe - turn) / denominator;
 
         setMotorPower(frontLeftPower, frontRightPower, backLeftPower, backRightPower);
+    }
+
+
+    // Drive with the specified heading in radians
+    public void driveWithHeading(double driveCmd, double strafeCmd, double turnCmd, double currentHeading, double headingDeg) {
+        double headingRad, error, newTurnCmd;
+        double gainHeading = 0.3;
+
+        headingRad = headingDeg / 180 * Math.PI;
+
+        error = headingRad - currentHeading;
+        newTurnCmd = gainHeading * error;
+        mecanumDrive(driveCmd, strafeCmd, newTurnCmd);
+
+    }
+
+
+    // This routine drives the robot field relative
+    public void driveFieldRelative(double forward, double right, double rotate, double currentHeading) {
+        // First, convert direction being asked to drive to polar coordinates
+        double theta = Math.atan2(forward, right);
+        double r = Math.hypot(right, forward);
+
+        // Second, rotate angle by the angle the robot is pointing
+        theta = AngleUnit.normalizeRadians(theta - currentHeading);
+//                imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+
+        // Third, convert back to cartesian
+        double newForward = r * Math.sin(theta);
+        double newRight = r * Math.cos(theta);
+
+        // Finally, call the drive method with robot relative forward and right amounts
+        mecanumDrive(newForward, newRight, rotate);
     }
 
 
