@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.SubSystems;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
@@ -70,15 +71,11 @@ public class MecanumDriveSingleton {
 
     // Drive with the specified heading in radians
     public void driveWithHeading(double driveCmd, double strafeCmd, double turnCmd, double currentHeading, double headingDeg) {
-        double headingRad, error, newTurnCmd;
-        double gainHeading = 0.05;
+        double error, newTurnCmd;
+        double gainHeading = 0.8;
 
-//        headingRad = headingDeg / 180 * Math.PI;
-
-//        error = AngleUnit.normalizeRadians(headingRad - currentHeading);
         error = headingDeg - currentHeading;
-//        newTurnCmd = Math.max(gainHeading * error, 1.0);
-        newTurnCmd = gainHeading * error;
+        newTurnCmd = Range.clip(gainHeading * error, -1.0, 1.0);
 
         mecanumDrive(driveCmd, strafeCmd, newTurnCmd);
 
