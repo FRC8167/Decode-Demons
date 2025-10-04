@@ -71,12 +71,15 @@ public class MecanumDriveSingleton {
     // Drive with the specified heading in radians
     public void driveWithHeading(double driveCmd, double strafeCmd, double turnCmd, double currentHeading, double headingDeg) {
         double headingRad, error, newTurnCmd;
-        double gainHeading = 1.1;
+        double gainHeading = 0.05;
 
-        headingRad = headingDeg / 180 * Math.PI;
+//        headingRad = headingDeg / 180 * Math.PI;
 
-        error = AngleUnit.normalizeRadians(headingRad - currentHeading);
-        newTurnCmd = Math.max(gainHeading * error, 1.0);
+//        error = AngleUnit.normalizeRadians(headingRad - currentHeading);
+        error = headingDeg - currentHeading;
+//        newTurnCmd = Math.max(gainHeading * error, 1.0);
+        newTurnCmd = gainHeading * error;
+
         mecanumDrive(driveCmd, strafeCmd, newTurnCmd);
 
     }
