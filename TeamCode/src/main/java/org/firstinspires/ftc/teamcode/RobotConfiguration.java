@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import android.hardware.Sensor;
-
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -10,6 +8,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
 import org.firstinspires.ftc.teamcode.SubSystems.MecanumDriveSingleton;
 import org.firstinspires.ftc.teamcode.SubSystems.Sensor_IMU;
+import org.firstinspires.ftc.teamcode.SubSystems.Shooter;
 
 import java.util.List;
 import java.util.Locale;
@@ -37,6 +36,7 @@ public abstract class RobotConfiguration extends LinearOpMode {
     /*----------- Define all Module Classes (SubSystems) ------------*/
     protected Sensor_IMU imu;
     protected MecanumDriveSingleton drive;
+    protected Shooter shooter;
 
 
     /*---------------------- Vision Objects -------------------------*/
@@ -61,17 +61,17 @@ public abstract class RobotConfiguration extends LinearOpMode {
         }
 
         /* ******************* Define Hardware Map Here ******************** */
-        DcMotorEx driveMotorLF = hardwareMap.get(DcMotorEx.class, "Motor Name");
-        DcMotorEx driveMotorLR = hardwareMap.get(DcMotorEx.class, "Motor Name");
-        DcMotorEx driveMotorRF = hardwareMap.get(DcMotorEx.class, "Motor Name");
-        DcMotorEx driveMotorRR = hardwareMap.get(DcMotorEx.class, "Motor Name");
+        DcMotorEx driveMotorLF = hardwareMap.get(DcMotorEx.class, "LfDrive");
+        DcMotorEx driveMotorLR = hardwareMap.get(DcMotorEx.class, "LrDrive");
+        DcMotorEx driveMotorRF = hardwareMap.get(DcMotorEx.class, "RfDrive");
+        DcMotorEx driveMotorRR = hardwareMap.get(DcMotorEx.class, "RrDrive");
+        DcMotorEx shooterMotor = hardwareMap.get(DcMotorEx.class, "shooterMotor");
 
         IMU imuSensor = hardwareMap.get(IMU.class, "imu");
-
-        /* Create an object of every module/subsystem needed for both autonomous and teleOp modes. */
         imu = Sensor_IMU.getInstance(imuSensor);
+        /* Create an object of every module/subsystem needed for both autonomous and teleOp modes. */
         drive = MecanumDriveSingleton.getInstance(driveMotorLF, driveMotorLR, driveMotorRF, driveMotorRR);
-
+        shooter = new Shooter(shooterMotor);
     }
 
 
