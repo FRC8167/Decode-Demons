@@ -11,8 +11,8 @@ import org.firstinspires.ftc.teamcode.Cogintilities.TeamConstants;
 public class Shooter implements TeamConstants {
     private DcMotorEx shooterMotor;
     private double  pgain;
-    double shooterSpeed;
-    final double maxSpeed = 6000;
+    private double shooterSpeed;
+    private final double maxSpeed = 28000;
 
 
     public Shooter(DcMotorEx motor) {
@@ -24,31 +24,33 @@ public class Shooter implements TeamConstants {
         motor.setPower(0);
 
         shooterSpeed = 0;
-        pgain = 0.2;
+        pgain = 0;
         motor.setVelocityPIDFCoefficients(pgain,0,0,0);
     }
 
 
     public void setMotorPower(double rangeInM) {
         shooterSpeed = rangeInM*1;
-        shooterMotor.setVelocity(Range.clip(shooterSpeed,0,maxSpeed));
+        shooterMotor.setVelocity(Range.clip(shooterSpeed,-1,1)); //0,maxSpeed));
     }
 
 
     public void increaseShooterMotorSpeed(){
-        shooterSpeed += 500;
-        setMotorSpeed(shooterSpeed);
+        shooterSpeed += 0.2;
+        //setMotorSpeed(shooterSpeed);
+        setMotorPower(shooterSpeed);
     }
 
 
     public void decreaseShooterMotorSpeed(){
-        shooterSpeed -= 500;
-        setMotorSpeed(shooterSpeed);
+        shooterSpeed -= 0.2;
+       // setMotorSpeed(shooterSpeed);
+        setMotorPower(shooterSpeed);
     }
 
 
     public void setMotorSpeed(double speed){
-        shooterMotor.setVelocity(Range.clip(speed,0,maxSpeed), AngleUnit.DEGREES);
+        shooterMotor.setVelocity(speed); //Range.clip(speed,0,maxSpeed), AngleUnit.DEGREES);
     }
 
 

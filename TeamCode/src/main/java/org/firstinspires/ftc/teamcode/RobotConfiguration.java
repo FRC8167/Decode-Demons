@@ -1,14 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.lynx.LynxModule;
+import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
+import org.firstinspires.ftc.teamcode.SubSystems.ColorMatch;
+import org.firstinspires.ftc.teamcode.SubSystems.Intake;
 import org.firstinspires.ftc.teamcode.SubSystems.MecanumDriveSingleton;
 import org.firstinspires.ftc.teamcode.SubSystems.Sensor_IMU;
 import org.firstinspires.ftc.teamcode.SubSystems.Shooter;
+import org.firstinspires.ftc.teamcode.SubSystems.Vision;
 
 import java.util.List;
 import java.util.Locale;
@@ -37,6 +42,9 @@ public abstract class RobotConfiguration extends LinearOpMode {
     protected Sensor_IMU imu;
     protected MecanumDriveSingleton drive;
     protected Shooter shooter;
+    protected Intake intake;
+    protected ColorMatch colorMatch;
+    protected Vision vision;
 
 
     /*---------------------- Vision Objects -------------------------*/
@@ -66,12 +74,20 @@ public abstract class RobotConfiguration extends LinearOpMode {
         DcMotorEx driveMotorRF = hardwareMap.get(DcMotorEx.class, "RfDrive");
         DcMotorEx driveMotorRR = hardwareMap.get(DcMotorEx.class, "RrDrive");
         DcMotorEx shooterMotor = hardwareMap.get(DcMotorEx.class, "shooterMotor");
+        DcMotorEx intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
+
+        //RevColorSensorV3 colorSensor = hardwareMap.get(RevColorSensorV3.class, "shooter");
+        //WebcamName webCam1 = hardwareMap.get(WebcamName.class, "Webcam1");
 
         IMU imuSensor = hardwareMap.get(IMU.class, "imu");
         imu = Sensor_IMU.getInstance(imuSensor);
         /* Create an object of every module/subsystem needed for both autonomous and teleOp modes. */
         drive = MecanumDriveSingleton.getInstance(driveMotorLF, driveMotorLR, driveMotorRF, driveMotorRR);
         shooter = new Shooter(shooterMotor);
+        intake = new Intake(intakeMotor);
+        //colorMatch = new ColorMatch(colorSensor);
+        //vision = new Vision(webCam1);
+
     }
 
 
