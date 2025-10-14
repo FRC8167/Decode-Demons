@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Cogintilities;
 
+import com.qualcomm.robotcore.robocol.Command;
+
 public class LPF_Basic {
     private double alpha;
     private double filteredValue;

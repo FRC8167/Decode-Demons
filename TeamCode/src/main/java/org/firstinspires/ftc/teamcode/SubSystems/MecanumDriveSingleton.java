@@ -143,5 +143,5 @@ public class MecanumDriveSingleton {
     public double getLRpower()  { return back_left_drive.getPower(); }
     public double getRFpower()  { return front_right_drive.getPower(); }
     public double getRRpower()  { return back_right_drive.getPower(); }
-    
+
 }
