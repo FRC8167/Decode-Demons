@@ -32,8 +32,9 @@ public class IntakeShooterTeleOp extends RobotConfiguration {
                 shooter.decreaseShooterMotorSpeed();
             }
 
-            telemetry.addData("Shooter Velocity = ", shooter.getShooterSpeed());
-
+            telemetry.addData("Shooter Velocity", shooter.getShooterSpeed());
+            telemetry.addData("Shooter Var:", shooter.getShooterVar());
+            telemetry.addData("Encoder:", shooter.getEncoderCnts());
             telemetry.update();
         }
     }

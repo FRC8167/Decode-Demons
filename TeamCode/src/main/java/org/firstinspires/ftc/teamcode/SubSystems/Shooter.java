@@ -21,13 +21,15 @@ public class Shooter implements TeamConstants {
         motor.setDirection(DcMotorSimple.Direction.FORWARD);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 //        motor.setPower(0);
         motor.setVelocity(0);
 
         shooterSpeed = 0;
-        pgain = 1;
-        motor.setVelocityPIDFCoefficients(pgain,0,0,0);
+        pgain = 2;
+        motor.setVelocityPIDFCoefficients(pgain,0.5,0,13);
     }
 
 
@@ -39,13 +41,13 @@ public class Shooter implements TeamConstants {
 
 
     public void increaseShooterMotorSpeed(){
-        shooterSpeed += 200;
+        shooterSpeed += 500;
         setMotorSpeed(shooterSpeed);
     }
 
 
     public void decreaseShooterMotorSpeed(){
-        shooterSpeed -= 200;
+        shooterSpeed -= 500;
         setMotorSpeed(shooterSpeed);
     }
 
@@ -77,5 +79,11 @@ public class Shooter implements TeamConstants {
         return shooterMotor.getVelocity() / ticksPerRev * 60;
     }
 
+    public double getShooterVar() {
+        return shooterSpeed;
+    }
 
+    public int getEncoderCnts() {
+        return shooterMotor.getCurrentPosition();
+    }
 }
