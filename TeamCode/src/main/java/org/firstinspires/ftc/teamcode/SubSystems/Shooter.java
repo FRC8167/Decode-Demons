@@ -12,7 +12,6 @@ public class Shooter implements TeamConstants {
     private double  pgain;
     private double shooterSpeed;
 
-    private final double rangeToSpeedTransferFunction = 1.0;
     private final int ticksPerRev = 28;
     private final double maxSpeed = 28000;
 
@@ -33,7 +32,7 @@ public class Shooter implements TeamConstants {
 
 
     public void shootFromDistance(double rangeInM) {
-        shooterSpeed = rangeInM * rangeToSpeedTransferFunction;
+        shooterSpeed = rangeToSpeedTransferFunction(rangeInM);
 //        shooterMotor.setVelocity(Range.clip(shooterSpeed,0, maxSpeed));
         setMotorSpeed(shooterSpeed);
     }
@@ -57,6 +56,16 @@ public class Shooter implements TeamConstants {
      */
     public void setMotorSpeed(double rpm){
         shooterMotor.setVelocity(rpm / 60 * ticksPerRev); //Range.clip(speed,0,maxSpeed));
+    }
+
+
+    /**
+     * Transfer function to set motor speed based on the range to the target.
+     * @param range Distance to the target in meters.
+     * @return shootor motor rpm
+     */
+    private double rangeToSpeedTransferFunction(double range) {
+        return range * 1 + 0;
     }
 
 
