@@ -8,12 +8,12 @@ import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit;
-import org.firstinspires.ftc.teamcode.SubSystems.ColorMatch;
+//import org.firstinspires.ftc.teamcode.SubSystems.ColorMatch;
 import org.firstinspires.ftc.teamcode.SubSystems.Intake;
 import org.firstinspires.ftc.teamcode.SubSystems.MecanumDriveSingleton;
 import org.firstinspires.ftc.teamcode.SubSystems.Sensor_IMU;
 import org.firstinspires.ftc.teamcode.SubSystems.Shooter;
-import org.firstinspires.ftc.teamcode.SubSystems.Vision;
+//import org.firstinspires.ftc.teamcode.SubSystems.Vision;
 
 import java.util.List;
 import java.util.Locale;
@@ -43,8 +43,8 @@ public abstract class RobotConfiguration extends LinearOpMode {
     protected MecanumDriveSingleton drive;
     protected Shooter shooter;
     protected Intake intake;
-    protected ColorMatch colorMatch;
-    protected Vision vision;
+//    protected ColorMatch colorMatch;
+//    protected Vision vision;
 
 
     /*---------------------- Vision Objects -------------------------*/

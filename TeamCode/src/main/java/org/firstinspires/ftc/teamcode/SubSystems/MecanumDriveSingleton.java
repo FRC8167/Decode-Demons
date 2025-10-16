@@ -76,7 +76,7 @@ public class MecanumDriveSingleton {
         double headingFineGain   = 0.05;
 
         error = headingDeg - currentHeading;
-
+        /* Need Angle Wrap calculation to ensure turning the shortest distance */
         if(error > 10) {
             newTurnCmd = Range.clip(headingCourseGain * error, -1.0, 1.0);
         } else {

@@ -46,7 +46,7 @@ public class Sensor_IMU {
 
     public void readIMU() {
         double[] imuData;
-        yawAngle = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
+        yawAngle = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS); // [-180 to 180]
         yawRate = imu.getRobotAngularVelocity(AngleUnit.RADIANS).zRotationRate;
     }
 
