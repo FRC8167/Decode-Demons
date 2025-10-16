@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.OpModes_TeleOp;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.teamcode.RobotConfiguration;
 
-//@Disabled
+@Disabled
 @TeleOp(name="Drive with Heading")
 public class TeleOp_DriveHeading extends RobotConfiguration {
 

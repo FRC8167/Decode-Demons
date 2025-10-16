@@ -10,16 +10,19 @@ import org.firstinspires.ftc.teamcode.Cogintilities.TeamConstants;
 
 public class Shooter implements TeamConstants {
     private final DcMotorEx shooterMotor;
-    private double  pgain, kP;
+    private double  pgain;
     private double shooterSpeed;
 
     private final int ticksPerRev = 28;
     private final double maxSpeed = 28000;
 
-    PID_Controller pid;
 
     public Shooter(DcMotorEx motor) {
         shooterMotor = motor;
+
+        /** YIKES! shooterMotor defined above and then all the parameters are set to motor argument
+         * and shooterMotor is never updated!
+         */
         motor.setDirection(DcMotorSimple.Direction.FORWARD);
         motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -32,9 +35,8 @@ public class Shooter implements TeamConstants {
         shooterSpeed = 0;
         pgain = 2;
         motor.setVelocityPIDFCoefficients(pgain,0.5,0,13);
+        /** ************************************************************************************ */
 
-        /* Alternate PID Control Using Motor Power */
-        pid = new PID_Controller(kP,0,0,13);
     }
 
 
@@ -92,29 +94,4 @@ public class Shooter implements TeamConstants {
         return shooterMotor.getCurrentPosition();
     }
 
-
-    /* ************************ Alternate PID Control Using Motor Power ************************  */
-    private void setMotorPower(double pwr) {
-        shooterMotor.setPower(Range.clip(pwr, -1, 1));
-    }
-
-
-    public void setTarget(double rpm) {
-        pid.setPoint(rpm);
-    }
-
-
-    public void update(double feedback) {
-        shooterMotor.setPower(pid.command(feedback));
-    }
-
-
-    public void update() {
-        shooterMotor.setPower(pid.command(shooterMotor.getVelocity()));
-    }
-
-
-    public double getShooterMotorPwr() {
-        return shooterMotor.getPower();
-    }
 }

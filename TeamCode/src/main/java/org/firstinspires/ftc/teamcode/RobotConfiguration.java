@@ -13,6 +13,7 @@ import org.firstinspires.ftc.teamcode.SubSystems.Intake;
 import org.firstinspires.ftc.teamcode.SubSystems.MecanumDriveSingleton;
 import org.firstinspires.ftc.teamcode.SubSystems.Sensor_IMU;
 import org.firstinspires.ftc.teamcode.SubSystems.Shooter;
+import org.firstinspires.ftc.teamcode.SubSystems.Shooter_CustomPID;
 //import org.firstinspires.ftc.teamcode.SubSystems.Vision;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public abstract class RobotConfiguration extends LinearOpMode {
     protected Intake intake;
 //    protected ColorMatch colorMatch;
 //    protected Vision vision;
+    protected Shooter_CustomPID shooterPID;
 
 
     /*---------------------- Vision Objects -------------------------*/
@@ -74,7 +76,7 @@ public abstract class RobotConfiguration extends LinearOpMode {
         DcMotorEx driveMotorRF = hardwareMap.get(DcMotorEx.class, "RfDrive");
         DcMotorEx driveMotorRR = hardwareMap.get(DcMotorEx.class, "RrDrive");
         DcMotorEx shooterMotor = hardwareMap.get(DcMotorEx.class, "shooterMotor");
-        DcMotorEx intakeMotor = hardwareMap.get(DcMotorEx.class, "intakeMotor");
+        DcMotorEx intakeMotor  = hardwareMap.get(DcMotorEx.class, "intakeMotor");
 
         //RevColorSensorV3 colorSensor = hardwareMap.get(RevColorSensorV3.class, "shooter");
         //WebcamName webCam1 = hardwareMap.get(WebcamName.class, "Webcam1");
@@ -87,7 +89,7 @@ public abstract class RobotConfiguration extends LinearOpMode {
         intake = new Intake(intakeMotor);
         //colorMatch = new ColorMatch(colorSensor);
         //vision = new Vision(webCam1);
-
+        shooterPID = new Shooter_CustomPID(shooterMotor);
     }
 
 
